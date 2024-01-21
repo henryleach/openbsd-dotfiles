@@ -1,0 +1,88 @@
+# Appeareance and termbar spacing
+snapdist	4
+sticky		yes
+gap 		24 0 0 0
+ignore 		"termbar"
+autogroup 0	"termbar,termbar"
+fontname  	"Courier:pixelsize=18:bold"
+color menubg	"orange"
+color activeborder	"orange"
+
+# Mouse bindings
+unbind-mouse all
+bind-mouse 4-1	window-move
+bind-mouse 4-2 	window-resize
+bind-mouse 4S-1 window-resize
+
+# Keyboard bindings
+# 4 is the Windows/Super key, that doesn't conflict with much
+# especially Emacs
+unbind-key   all
+
+# Window Navigation
+bind-key M-Tab	window-cycle
+bind-key MS-Tab	window-rcycle
+
+# Window Geometry
+# "ijkl" is like the right hand side WASD on UK Keyboards
+# and I have no vi(m) muscle memory
+bind-key 4-l	window-move-right-big
+bind-key 4-j	window-move-left-big
+bind-key 4-i	window-move-up-big
+bind-key 4-k	window-move-down-big
+bind-key 4S-l	window-move-right
+bind-key 4S-j	window-move-left
+bind-key 4S-i	window-move-up
+bind-key 4S-k	window-move-down
+bind-key 4C-l	window-resize-right-big
+bind-key 4C-j	window-resize-left-big
+bind-key 4C-i	window-resize-up-big
+bind-key 4C-k	window-resize-down-big
+
+# Window Position
+bind-key 4-Right   window-snap-right
+bind-key 4-Left	   window-snap-left
+bind-key 4-f	   window-maximize	# Honors gaps
+
+# Window Order
+bind-key 4-Down	   window-lower
+bind-key 4-Up	   window-raise
+
+# Window Control
+bind-key 4-x	window-close
+
+# There's sadly no move to right-half screen
+# option, but if you vtile (which uses left half)
+# and then pick another vmaximize it's only
+# a couple of keystrokes.
+bind-key 4-v  window-vmaximize
+bind-key 4-h	window-vtile
+
+# Group Navigation
+bind-key 4-Tab	group-cycle
+bind-key 4S-Tab	group-rcycle
+
+bind-key 4-1 group-only-1
+bind-key 4-2 group-only-2
+bind-key 4-3 group-only-3
+bind-key 4-4 group-only-4
+bind-key 4S-1 window-movetogroup-1
+bind-key 4S-2 window-movetogroup-2
+bind-key 4S-3 window-movetogroup-3
+bind-key 4S-4 window-movetogroup-4
+
+# Command functions
+bind-key 4-space	menu-cmd
+bind-key 4-slash 	menu-exec
+bind-key 4-Return 	terminal
+bind-key 4S-slash 	menu-window
+bind-key 4S-r		restart
+bind-key 4S-q		quit
+
+# Command window entries
+command xterm xterm "-e fish"
+command emacs emacs "-fh --name=Emacs"
+command firefox firefox
+command chromium chrome "--enable-unveil"
+command w3m xterm "-e w3m https://www.duckduckgo.com"
+

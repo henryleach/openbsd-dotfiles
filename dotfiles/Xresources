@@ -1,0 +1,52 @@
+Xft.antialias: true
+
+! Always start in unicode
+XTerm*utf8: true
+
+! Lines of output that you can scroll back over
+XTerm*saveLines: 4096
+! Turn the scrollbar on, and put it on the right
+XTerm*scrollBar: true
+XTerm*rightScrollBar: true
+
+! Only select text
+XTerm*highlightSelection: true
+! Remove trailing spaces
+XTerm*trimSelection: true
+! and dont include a trailing newline in the selection!
+XTerm*cutNewline             : false
+! some black magic to change what characters XTerm considers "word delimiters"
+XTerm*charClass              : 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+! select word on two clicks
+XTerm*on2Clicks              : word
+! select whole line on three clicks
+XTerm*on3Clicks              : line
+
+! set TERM env variable to use 256 colors
+XTerm*termName               : xterm-256color
+! make alt key work normally
+XTerm*vt100.metaSendsEscape  : true
+XTerm.vt100.locale: false
+XTerm.vt100.utf8: true
+
+! Merge in a nice theme
+# include "/home/h/.dotfiles/resources/base16-gruvbox-dark-pale-256.Xresources"
+
+! Select a nicer font and slightly larger than the default
+XTerm*faceName: CallingCode:size=8:
+! Back-up font if CallingCode isn't installed
+! XTerm*faceName: Courier:size=8:
+
+! Make pasting in things like Firefox easier:
+XTerm*selectToClipboard: true
+
+! Adds more 'usual' copy and paste
+! functionality with Ctrl+Shift+C/V
+! which works better on trackpads without good middle mouse options.
+! TODO not working Last options means shift+left click opens url in preferred viewer
+XTerm*VT100.Translations: #override \n\
+                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
+! \n\
+!		 Shift : exec-formatted("xdg-open '%t'", PRIMARY)
+

@@ -1,0 +1,48 @@
+	export EDITOR=mg
+export LANG=en.GB.UTF-8
+HISTFILE=$HOME/.ksh_history
+HISTSIZE=2000
+
+# Emacs mode gives usual movement keybindings
+set -o emacs
+
+# colorls really is worth the upgrade, but perhaps
+# it's not installed
+if command -v colorls > /dev/null ; then
+  LS='colorls -G'
+else
+  LS='ls'
+fi
+
+alias ls="$LS -FHh"
+alias ll='ls -l'
+alias la='ls -lA'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias mkdir='mkdir -p'
+alias df='df -h'
+alias du='du -ch'
+alias goodnight='shutdown -p now'
+
+# Easily copy text to the X Clipboard
+alias clip='yank | xsel -b'
+
+# Good for quick file editing
+alias emin='emacs -Q -nw'
+
+# Commit to current branch without comment
+# requires the git alias 'nccommit' to be in .gitconfig file.
+alias gnc='git add .; git nccommit; git push'
+alias gup='git fetch; git pull'
+
+# Set the prompt, and title
+# nice colored prompt that also sets xterm title
+_XTERM_TITLE='\[\033]0;\u@\h:\w\007\]'
+_PS1_CLEAR='\[\033[0m\]'
+_PS1_BLUE='\[\033[34m\]'
+case "$(id -u)" in
+  0) _PS1_COLOR='\[\033[1;31m\]' ;;
+  *) _PS1_COLOR='\[\033[33m\]'   ;;
+esac
+PS1='$_XTERM_TITLE\A $_PS1_COLOR\u@\h$_PS1_CLEAR:$_PS1_BLUE\w$_PS1_COLOR\$$_PS1_CLEAR '
+

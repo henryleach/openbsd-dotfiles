@@ -1,0 +1,32 @@
+# UTF-8 Everywhere
+export LANG=en_GB.UTF-8
+
+# Location of ksh config
+export ENV=$HOME/.kshrc
+
+# Add .Xresources for appearnce changes
+xrdb -merge $HOME/.Xresources
+
+# Set background colour
+xsetroot -solid dimgrey
+
+# Turn off system beep
+xset b off
+
+# Turn down the inital screenbrightness (%)
+xbacklight -set 50
+
+# set custom bindings in ~/.xbindkeysrc
+xbindkeys
+
+# Make caps lock control.
+setxkbmap -option ctrl:nocaps
+
+feh --no-fehbg --bg-fill ~/.dotfiles/resources/alex-_ZfLlKxilpw-unsplash_1366x768.jpg &
+
+xterm +sb -geometry 173x1+0+0 -fa "CallingCode:size=8" -name termbar \
+      -class termbar -T termbar \
+      -e ~/.dotfiles/resources/termbar &
+
+# Start CWM
+exec cwm

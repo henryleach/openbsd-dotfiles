@@ -1,0 +1,11 @@
+#BrightnessDown
+"xbacklight -10"
+m:0x0 + c:171
+# This doesn't map to the following, but does on linux
+# XF86MonBrightnessDown
+
+#BrightnessUp
+"xbacklight +10"
+    m:0x1 + c:68
+    Shift + F2
+# XF86MonBrightnessUp

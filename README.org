@@ -1,0 +1,53 @@
+#+TITLE: OpenBSD Dotfiles
+
+My collection of settings files for OpenBSD. It configures the CWM window manager and a simple shell based status bar across the top.
+
+A longer description of the original set-up is in this [[https://www.henryleach.com/2023/11/setting-up-openbsd-on-a-hp-stream11][blog post]], but this config has evolved away from that over time.
+
+* Pre-Requisites
+
+To work without modification the following additional programmes need to be installed:
+
+- [[https://feh.finalrewind.org/][~feh~]], for showing a wallpaper image.
+
+Additionally the following programmes should be installed if you want all the aliases in the ~.kshrc~ to work:
+- git
+- colorls
+- yank
+
+The ~.Xresources~ file expects my preferred mono-space font, [[https://dharmatype.com/calling-code][Calling Code]] to be installed. It's not a free font (in either sense of the word) so you probably want to change that, the commented out line following it specifies Courier as an alternative font.
+
+Anything else needed should be in the resources dir.
+
+To install a custom font, copy the .ttf files into ~/.fonts/ and then run
+: fc-cache
+
+To see existing mono-spaced regular fonts, that you can choose:
+: fc-list :mono:regular
+
+Then test it in XTerm by launching a new instance, in this case with Courier
+: xterm -fa "Courier"
+
+* Installation
+
+They can be installed from the ~dotfiles~ directory using the ~install-dotfiles.sh~ shell script. This will create hidden symlinks to all non-hidden regular files found in your home directory. WARNING: This will overwrite existing files! (If you want to change that behaviour, e.g. it will not overwrite, change the line in the install-dotfiles.sh that calls ~ln~ and remove the ~-f~ flag, then it won't overwrite.)
+
+: ./install-dotfiles.sh dotfiles
+
+* Termbar
+
+A 'termbar' is a simple status bar created in a terminal and positioned where you want it on the screen. I think the original came from [[https://github.com/vetelko/termbar][vetelko]], but there are a [[https://www.tumfatig.net/2020/a-simple-shell-status-bar-for-openbsd-and-cwm1/][few]] [[https://github.com/linfocito/termbar][about]], and this is my spin on it. 
+
+The script is in the resources dir, the width probably needs to be adjusted to the current screen resolution, which can be done by editing the amount of spaces and tabs in the line starting ~printf~.
+
+* Miscellaneous
+
+.gitconfig includes and import of the file gitconfig_private which includes centre details best not shared. You may want to add your own, or it may complain that it's missing.
+
+* Licenses & Attributions
+
+The [[https://unsplash.com/photos/orange-yellow-and-blue-papers-_ZfLlKxilpw][wallpaper]] is by [[https://unsplash.com/@brizmaker][Alex]] and licensed via the [[https://unsplash.com/license][Unsplash License]]
+
+The Gruvbox XTerm theme is taken from this collection of [[https://github.com/janoamaral/Xresources-themes][Xresources-themes]] and GPL-3 licensed.
+
+Everything else is covered by the LICENSE file.

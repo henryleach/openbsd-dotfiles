@@ -1,0 +1,12 @@
+[user]
+	name = H
+[include]
+	path = ~/.gitconfig_private
+
+[alias]
+	nccommit = commit -a --allow-empty-message -m \"\"
+[init]
+	defaultBranch = main
+[core]
+	excludefiles = ~/.dotfiles/gitignore_global
+

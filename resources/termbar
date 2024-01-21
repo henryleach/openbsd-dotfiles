@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Create a line of stats as a simple status bar designed for use with
+# CWM or other simple window managers.
+# Adjust the space between entries as needed with the escaped
+# tab characters `\\t` in the line starting printf
+
+# Colours, as listed https://www.ibm.com/support/pages/colorizing-csh-or-ksh-shell
+# first is escape
+e="`echo x | tr x '\033'`"
+red="${e}[31m"
+green="${e}[32m"
+yellow="${e}[33m"
+blue="${e}[34m"
+magenta="${e}[35m"
+cyan="${e}[36m"
+white="${e}[37m"
+bold="${e}[1m"
+end="${e}[0m"
+
+while true; do
+    OS=$(uname)
+    HOST=$(hostname -s)
+    CPU_SPEED=$(sysctl hw.cpuspeed | cut -d "=" -f 2 | cut -d "." -f 1)
+    CPU_TEMP=$(sysctl hw.sensors.cpu0.temp0 | cut -d "=" -f 2 | cut -d "." -f 1)
+    RAM=$(top | grep Memory | awk {'print $3'})
+    # This doesn't seem to pick up the charger reliably, the raw battery status does work.
+    # BAT_STATUS=$(sysctl hw.sensors.acpiac0.indicator0 | cut -d "=" -f 2 | cut -d "." -f 1)
+    BAT_RAW=$(sysctl hw.sensors.acpibat0.raw0 | cut -d "=" -f 2 | cut -c 1)
+
+    case $BAT_RAW in
+	1 ) BAT_SYM="${bold}→${end}" ;; # discharging
+	2 ) BAT_SYM="${bold}←${end}" ;; # charging
+	* ) BAT_SYM="?" ;; # while uncertain
+    esac
+    BAT=$(apm -l)
+
+    if [ $BAT -gt "70" ]; then
+	BAT_PRETTY="$BAT%"
+    elif [ $BAT -gt 35 ]; then
+	BAT_PRETTY="${yellow}$BAT%${end}"
+    else
+	BAT_PRETTY="${red}${bold}$BAT%${end}"
+    fi
+       
+    DATE=$(date +"%a, %b %d - %H:%M %Z %Y")
+
+    # printf instead of echo so we can do pretty colours
+    printf "  ${yellow}%s${end} %s@%s \\t\\t\\t\\t\\t\\t\\t\\t\\t  | CPU:%+4s - %s°C | MEM: %s |🔋%s %s | %s\\r" \
+	     "$OS" "$USER" "$HOST" "$CPU_SPEED" "$CPU_TEMP" "$RAM" "$BAT_SYM" "$BAT_PRETTY" "$DATE"
+    sleep 1
+    
+done
+
