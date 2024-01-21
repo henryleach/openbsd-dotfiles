@@ -8,7 +8,7 @@ A longer description of the original set-up is in this [[https://www.henryleach.
 
 To work without modification the following additional programmes need to be installed:
 
-- [[https://feh.finalrewind.org/][~feh~]], for showing a wallpaper image.
+- [[https://feh.finalrewind.org/][feh]], for showing a wallpaper image.
 
 Additionally the following programmes should be installed if you want all the aliases in the ~.kshrc~ to work:
 - git
@@ -18,15 +18,6 @@ Additionally the following programmes should be installed if you want all the al
 The ~.Xresources~ file expects my preferred mono-space font, [[https://dharmatype.com/calling-code][Calling Code]] to be installed. It's not a free font (in either sense of the word) so you probably want to change that, the commented out line following it specifies Courier as an alternative font.
 
 Anything else needed should be in the resources dir.
-
-To install a custom font, copy the .ttf files into ~/.fonts/ and then run
-: fc-cache
-
-To see existing mono-spaced regular fonts, that you can choose:
-: fc-list :mono:regular
-
-Then test it in XTerm by launching a new instance, in this case with Courier
-: xterm -fa "Courier"
 
 * Installation
 
